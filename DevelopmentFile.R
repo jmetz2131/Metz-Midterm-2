@@ -82,9 +82,22 @@ setClass(Class="Trap",
          prototype=prototype(
            x = c(),
            y = c(),
-           revenue = c()
+           result = c()
          )
 )
+
+setMethod("initialize", "Trap", 
+          function(.Object, ...){
+            value=callNextMethod()
+            return(value)
+          }
+) 
+
+setMethod("print", "Trap",
+          function(x){
+            cat("This integration was calculated using the Trapezoidal Rule.")
+            cat(x@result)
+          })
 
 ##Setting up a class trap to output the x and y values of a function
 ##and the resulting integration when using the Trapezoidal Rule.
@@ -97,11 +110,22 @@ setClass(Class="Simp",
          prototype=prototype(
            x = c(),
            y = c(),
-           revenue = c()
+           result = c()
          )
 )
 
+setMethod("initialize", "Simp", 
+          function(.Object, ...){
+            value=callNextMethod()
+            return(value)
+          }
+) 
 
+setMethod("print", "Simp",
+          function(x){
+            cat("This integration was calculated using Simpson's Rule.")
+            cat(x@result)
+          })
 
 #####Setting up plotting
 example <- integrateIt(test_x, test_y, 1, 9, "Trap")
