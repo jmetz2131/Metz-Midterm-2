@@ -3,14 +3,14 @@
 #' Object of class \code{Simp} as created by the \code{integrateIt} functions
 #'
 #' 
-#' An object of the class `Simp' has the following slots:
+#' An object of the class Simp has the following slots:
 #' \itemize{
 #' \item \code{x} The x values for a function the user chooses to integrate using Simpson's Rule
 #' \item \code{y} The y values for a function the user chooses to integrate using Simpson's Rule
 #' \item \code{result} This is the result of integrating the function with Simpson's Rule.
 #' }
 #'
-#' @author Jacob Metz: \email{jacob.metz@@wustl.edu}
+#' @author Jacob Metz: \email{jacob.metz@wustl.edu}
 #' @aliases Simp-class initialize,Simp-method plot,Simp-method print
 #' @rdname Simpson's Rule
 #' @export
@@ -38,22 +38,21 @@ setMethod("initialize", "Simp",
 ) 
 
 #' @export
-setValidity("Simp", function(object){
-  evenPartitions <- length(object@y)%%2==1
-  dataPoints <- length(object@x)==length(object@y)
-  firstPoint <- object@a==object@x[1]
-  lastPoint <- object@b==object@x[n]
-  if(!evenPartitions | !dataPoints | !firstPoint | !lastPoint){
-    return("The user has not entered values consistent with the rules set up for this class! Try again!")
-  }
-})
-
-#' @export
 setMethod("print", "Simp",
           function(x){
             cat("This integration was calculated using Simpson's Rule.")
             cat(x@result)
           })
+
+#' @export
+setValidity("Simp", function(object){
+  evenPartitions <- length(object@y)%%2==1
+  dataPoints <- length(object@x)==length(object@y)
+  if(!evenPartitions | !dataPoints){
+    return("The user has not entered values consistent with the rules set up for this class! Try again!")
+  }
+})
+
 
 
 

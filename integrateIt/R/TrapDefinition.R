@@ -3,14 +3,14 @@
 #' Object of class \code{Trap} as created by the \code{integrateIt} functions
 #'
 #' 
-#' An object of the class `Trap' has the following slots:
+#' An object of the class Trap has the following slots:
 #' \itemize{
 #' \item \code{x} The x values for a function the user chooses to integrate using the Trapezoidal Rule
 #' \item \code{y} The y values for a function the user chooses to integrate using the Trapezoidal Rule
 #' \item \code{result} This is the result of integrating the function with the Trapezoidal Rule.
 #' }
 #'
-#' @author Jacob Metz: \email{jacob.metz@@wustl.edu}
+#' @author Jacob Metz: \email{jacob.metz@wustl.edu}
 #' @aliases Trap-class initialize,Trap-method plot,Trap-method print
 #' @rdname Trapezoidal Rule
 #' @export
@@ -48,10 +48,8 @@ setMethod("print", "Trap",
 #' @export
 setValidity("Trap", function(object){
   dataPoints <- length(object@x)==length(object@y)
-  firstPoint <- object@a==object@x[1]
-  lastPoint <- object@b==object@x[n]
-  if(!dataPoints | !firstPoint | !lastPoint){
+  if(!dataPoints){
     return("The user has not entered values consistent with the rules set up for this class! Try again!")
   }
-  
 })
+

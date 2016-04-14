@@ -1,12 +1,25 @@
+#' integrateIt function
+#'
+#' integrates a given dataset of values and caluclates the output value based on either the Trapezoidal rule or Simpson's Rule
+#'
+#' @param x This is a vector of x values that the user inputs 
+#' @param y This is a vector of f(x) values that the user inputs
+#' @param a The starting point from which the user chooses to integrate
+#' @param b The ending point to which the user chooses to stop the integration
+#' @param Rule Whether the user is using the Trapezoidal Rule or Simpson's Rule
+#' @return An object of class Squares containing
+#'  \item{x}{This is a vector of x values that the user inputs} 
+#'  \item{y}{This is a vector of f(x) values that the user inputs}
+#'  \item{result}{The calculated output when using one of the rules}
+#' @author Jacob Metz
+#' @examples
+#' 
+
+#' @rdname integrateIt
+#' @aliases integrateIt,ANY-method
+#' @export
 #####Setting up the function
 integrateIt <- function(x, y, a, b, Rule){ 
-  ##The arguments in my integrateIt function are as follows: 
-  ## x = a vector of x values
-  ## y = a vector of f(x) values
-  ## a = the starting point from which the user chooses to integrate
-  ## b = the ending point to which the user chooses to stop the integration
-  ## Rule = whether the user is using the Trapezoidal Rule or Simpson's Rule
-  
   ##For clarification, I am using f(x) values in this function, so am dealing with
   ##y in this function.
   
@@ -29,6 +42,8 @@ integrateIt <- function(x, y, a, b, Rule){
     answer <- (h/2)*(y[1]+y[length(y)]+2*(sum(y[2:penultimate])))
     ##answer is the actual Trapezoidal rule itself: 
     ##h/2*(f(x0)+2(f(x1)+...f(xn-1))+f(xn))
+    
+    output <- new("Trap", x=x, y=y,result=answer ) ##This gives the correct output in line with what the items in help file specify.
   }
   
   if(Rule=="Simp"){
@@ -50,6 +65,8 @@ integrateIt <- function(x, y, a, b, Rule){
     answer <- (h/3)*(y[1]+y[length(y)]+4*(sum(even)) + 2*(sum(odd)))
     ##answer is the actual Simpson's rule itself: 
     ##h/3*(f(x0)+4f(x1)+2f(x2)+4f(x3)...+4f(xn-1))+f(xn))
+    
+    output<-new("Simp", x=x, y=y, result=answer) ##This gives the correct output in line with what the items in help file specify.
   }
-  return(answer) ##This outputs the calculation from the Rule the user specifies
+  return(output) ##This outputs the calculation from the Rule the user specifies
 }
