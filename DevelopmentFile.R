@@ -71,7 +71,7 @@ integrateIt(test_x,test_y, 1, 9, "Simp") ##This correctly comes out to 17.33209
 ##both come close to the actual definite integral value.
 
 ####Class definitions
-##Setting up a class trap to output the x and y values of a function
+##Setting up a class Trap to output the x and y values of a function
 ##and the resulting integration when using the Trapezoidal Rule.
 setClass(Class="Trap",
          representation=list(
@@ -99,8 +99,18 @@ setMethod("print", "Trap",
             cat(x@result)
           })
 
-##Setting up a class trap to output the x and y values of a function
-##and the resulting integration when using the Trapezoidal Rule.
+setValidity("Trap", function(object){
+  dataPoints <- length(object@x)==length(object@y)
+  firstPoint <- object@a==object@x[1]
+  lastPoint <- object@b==object@x[n]
+  if(!dataPoints | !firstPoint | !lastPoint){
+    return("The user has not entered values consistent with the rules set up for this class! Try again!")
+  }
+  
+})
+
+##Setting up a class Simp to output the x and y values of a function
+##and the resulting integration when using Simpson's Rule.
 setClass(Class="Simp",
          representation=list(
            x = "numeric",
@@ -121,11 +131,24 @@ setMethod("initialize", "Simp",
           }
 ) 
 
+setValidity("Simp", function(object){
+  evenPartitions <- length(object@y)%%2==1
+  dataPoints <- length(object@x)==length(object@y)
+  firstPoint <- object@a==object@x[1]
+  lastPoint <- object@b==object@x[n]
+  if(!evenPartitions | !dataPoints | !firstPoint | !lastPoint){
+    return("The user has not entered values consistent with the rules set up for this class! Try again!")
+  }
+})
+
 setMethod("print", "Simp",
           function(x){
             cat("This integration was calculated using Simpson's Rule.")
             cat(x@result)
           })
+
+setMethod("plot", "Simp",
+          )
 
 #####Setting up plotting
 example <- integrateIt(test_x, test_y, 1, 9, "Trap")
