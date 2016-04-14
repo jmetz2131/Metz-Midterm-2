@@ -1,10 +1,15 @@
-##Setting up the function
+library(devtools)
+library(roxygen2)
+
+
+#####Setting up the function
 integrateIt <- function(x, y, a, b, Rule){ 
   ##The arguments in my integrateIt function are as follows: 
-    ## x = a vector of x values, y = a vector of f(x) values, a = the starting point 
-    ##from which the user chooses to integrate, b = the ending point to which 
-    ##the user chooses to stop the integration, Rule = whether the user is 
-    ##using the Trapezoidal Rule or Simpson's Rule
+    ## x = a vector of x values
+    ## y = a vector of f(x) values
+    ## a = the starting point from which the user chooses to integrate
+    ## b = the ending point to which the user chooses to stop the integration
+    ## Rule = whether the user is using the Trapezoidal Rule or Simpson's Rule
   
   ##For clarification, I am using f(x) values in this function, so am dealing with
   ##y in this function.
@@ -65,3 +70,40 @@ integrateIt(test_x,test_y, 1, 9, "Simp") ##This correctly comes out to 17.33209
 ##equation is supposed to be more accurate than the Trapezoidal Rule equation and they 
 ##both come close to the actual definite integral value.
 
+####Class definitions
+##Setting up a class trap to output the x and y values of a function
+##and the resulting integration when using the Trapezoidal Rule.
+setClass(Class="Trap",
+         representation=list(
+           x = "numeric",
+           y = "numeric",
+           result = "numeric"
+         ),
+         prototype=prototype(
+           x = c(),
+           y = c(),
+           revenue = c()
+         )
+)
+
+##Setting up a class trap to output the x and y values of a function
+##and the resulting integration when using the Trapezoidal Rule.
+setClass(Class="Simp",
+         representation=list(
+           x = "numeric",
+           y = "numeric",
+           result = "numeric"
+         ),
+         prototype=prototype(
+           x = c(),
+           y = c(),
+           revenue = c()
+         )
+)
+
+
+
+#####Setting up plotting
+example <- integrateIt(test_x, test_y, 1, 9, "Trap")
+plot(example$x, example$y, type="l")
+segments(example$x, example$y, example$x, 0)
