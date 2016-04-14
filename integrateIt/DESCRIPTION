@@ -1,9 +1,9 @@
 Package: integrateIt
 Type: Package
-Title: What the package does (short line)
+Title: Integration Methods Using the Trapezoidal Rule and Simpson's Rule
 Version: 1.0
 Date: 2016-04-14
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Author: Jacob Metz
+Maintainer: Jacob Metz <jacob.metz@wustl.edu>
+Description: This package allows a user to input x and y values for a certain function and integrate that function using either the Trapezoidal Rule or Simpson's Rule to approximate the area under the curve.
 License: What license is it under?
