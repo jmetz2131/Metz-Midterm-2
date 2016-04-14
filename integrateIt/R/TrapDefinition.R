@@ -45,6 +45,12 @@ setMethod("print", "Trap",
             cat("This integration was calculated using the Trapezoidal Rule.")
             cat(x@result)
           })
+
+#' @export
+setMethod("plot", "Trap",
+          function(x))
+
+
 #' @export
 setValidity("Trap", function(object){
   dataPoints <- length(object@x)==length(object@y)
@@ -52,4 +58,5 @@ setValidity("Trap", function(object){
     return("The user has not entered values consistent with the rules set up for this class! Try again!")
   }
 })
+
 
